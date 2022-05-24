@@ -16,6 +16,7 @@ RUN apt-get update  \
     && apt-get install -y extra-runtime-dependencies  \
     && rm -rf /var/lib/apt/lists/*
 
-COPY --from=builder /usr/local/cargo/bin/$PROJECT_SLUG /usr/local/bin/$PROJECT_SLUG
+COPY --from=builder /usr/src/cargo/bin/$PROJECT_SLUG /usr/src/bin/$PROJECT_SLUG
 
+EXPOSE 8888:8888
 CMD ["$PROJECT_SLUG"]
