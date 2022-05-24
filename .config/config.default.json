@@ -1,8 +1,21 @@
 {
+  "databases": [
+    {
+      "name": "aether",
+      "uri": "mongodb://root:example@localhost:27017"
+    }
+  ],
   "project": {
     "name": "Aether",
     "slug": "aether"
   },
+  "providers": [
+    {
+      "endpoint": "https://rpc.ankr.com/eth",
+      "public_key": "",
+      "secret_key": ""
+    }
+  ],
   "server": {
     "host": [
       0,

@@ -1,10 +1,23 @@
 version: "3.9"
 services:
-  redis:
+  cache:
+    container_name: $PROJECT_SLUG-redis
     image: redis
-    restart: always
     ports:
       - "6379:6379"
+    restart: always
+
+  database:
+    container_name: $PROJECT_SLUG-mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    image: mongo
+    ports:
+      - "27017:27017"
+    restart: always
+
+
 
 volumes:
   data:
