@@ -1,0 +1,13 @@
+[package]
+authors = ["FL03 <jo3mccain@icloud.com>"]
+edition = "2021"
+name = "aether"
+version = "0.1.0"
+
+[dependencies]
+axum = "0.5.6"
+hyper = { features = ["full"], version = "0.14.18" }
+serde = { features = ["derive"], version = "1.0.137" }
+serde_json = "1.0.81"
+tokio = { features = ["full"], version = "1.18.2" }
+tower = "0.4.12"
