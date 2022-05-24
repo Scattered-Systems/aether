@@ -1,3 +1,4 @@
+pub mod api;
 pub mod networking;
 
 #[tokio::main]
