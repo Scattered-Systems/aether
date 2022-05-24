@@ -6,7 +6,7 @@ ADD . /usr/src/$PROJECT_SLUG
 WORKDIR /usr/src/$PROJECT_SLUG
 
 COPY . .
-RUN cargo build --package aether --release --verbose \
+RUN cargo build --package $PROJECT_SLUG --release --verbose \
     && rm ./src/*.rs  \
     && rm ./target/release/deps/$PROJECT_SLUG/*
 
