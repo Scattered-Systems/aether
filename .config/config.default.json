@@ -3,6 +3,10 @@
     {
       "name": "aether",
       "uri": "mongodb://root:example@localhost:27017"
+    },
+    {
+      "name": "aether",
+      "uri": "postrgesql://root:example@localhost:5432"
     }
   ],
   "project": {

@@ -13,7 +13,7 @@ services:
       - "6379:6379"
     restart: always
 
-  database:
+  mogno:
     container_name: $PROJECT_SLUG-mongodb
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
@@ -21,6 +21,16 @@ services:
     image: mongo
     ports:
       - "27017:27017"
+    restart: always
+
+  database-postgres:
+    container_name: $PROJECT_SLUG-postgresql
+    environment:
+      POSTGRES_USERNAME: root
+      POSTGRES_PASSWORD: example
+    image: postgres
+    ports:
+      - "5432:5432"
     restart: always
 
 volumes:
