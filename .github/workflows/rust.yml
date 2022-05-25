@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 env:
-  CARGO_PACKAGE: aether_cargo
+  CARGO_PACKAGE: aether
   CARGO_TERM_COLOR: always
 
 jobs:

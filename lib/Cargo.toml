@@ -1,6 +1,8 @@
 [package]
-authors = ["FL03 <jo3mccain@icloud.com>"]
+authors = ["FL03 <jo3mccain@icloud.com>", "Scattered-Systems <jo3mccain@scattered-systems.com>"]
+description = "A zk-SNARK based, Ethereum Native Multi-Chain engineered for optimal end-user experiences"
 edition = "2021"
+license = "MIT"
 name = "aether_core"
 repository = "https://github.com/scattered-systems/aether.git"
 version = "0.1.0"
@@ -8,6 +10,8 @@ version = "0.1.0"
 [lib]
 bench = false
 crate-type = ["cdylib", "rlib"]
+name = "aether_core"
+path = "src/lib.rs"
 test = true
 
 [[test]]
@@ -15,3 +19,4 @@ name = "simple"
 path = "tests/simple.rs"
 
 [dependencies]
+
