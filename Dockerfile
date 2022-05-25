@@ -11,10 +11,9 @@ RUN cargo build --package aether --release --verbose
 FROM debian:buster-slim
 
 ENV USER=user
-
-COPY --from=builder /application/target/release/aether .
+COPY --from=builder /application/target/release/aether ./application/$PROJECT_SLUG
 
 USER $USER:$USER
-
 EXPOSE 8080:8080
-CMD ["aether"]
+
+CMD ["application/aether"]
