@@ -11,6 +11,7 @@ crate-type = ["cdylib", "rlib"]
 test = true
 
 [[test]]
+name = "simple"
 path = "tests/simple.rs"
 
 [dependencies]
