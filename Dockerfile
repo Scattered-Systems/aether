@@ -1,6 +1,6 @@
 FROM rust as builder
 
-ADD  . ./application
+ADD  . /application
 WORKDIR /application
 
 RUN update-ca-certificates

@@ -1,4 +1,4 @@
-job("Build and Push: RustBox") {
+job("Build and Push: Aether") {
     docker {
         build {
             context = "."
@@ -7,7 +7,7 @@ job("Build and Push: RustBox") {
             labels["vendor"] = "scattered-systems"
         }
 
-        push("scattered-systems.registry.jetbrains.space/p/personal/containers/rustbox") {
+        push("scattered-systems.registry.jetbrains.space/p/scsys/containers/aether") {
             tags("0.0.\$JB_SPACE_EXECUTION_NUMBER", "latest")
         }
     }
