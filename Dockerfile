@@ -18,4 +18,4 @@ COPY --from=builder /application/target/release/$PROJECT_SLUG ./application/$PRO
 USER $USER:$USER
 
 EXPOSE 8080:8080
-CMD ["application/aether"]
+CMD ["./application/aether"]
