@@ -13,4 +13,4 @@ FROM debian:buster-slim
 COPY --from=builder /bin/target/release/aether /bin/aether
 EXPOSE 8080:8080
 
-CMD ["./bin/chaos"]
+CMD ["./bin/aether"]

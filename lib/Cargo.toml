@@ -1,6 +1,6 @@
 [package]
 authors = ["FL03 <jo3mccain@icloud.com>", "Scattered-Systems <jo3mccain@scattered-systems.com>"]
-description = "A zk-SNARK based, Ethereum Native Multi-Chain engineered for optimal end-user experiences"
+description = "A zk-SNARK, Ethereum Native Multi-Chain engineered for optimal user experiences"
 edition = "2021"
 license = "MIT"
 name = "aether_core"
