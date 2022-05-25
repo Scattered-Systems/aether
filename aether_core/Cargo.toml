@@ -6,6 +6,11 @@ repository = "https://github.com/scattered-systems/aether.git"
 version = "0.1.0"
 
 [lib]
+bench = false
 crate-type = ["cdylib", "rlib"]
+test = true
+
+[[test]]
+path = "tests/simple.rs"
 
 [dependencies]
