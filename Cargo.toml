@@ -1,5 +1,2 @@
 [workspace]
-members = [
-    "aether",
-    "aether_core"
-]
+members = ["bin", "lib"]

@@ -6,10 +6,6 @@ on:
   pull_request:
     branches: [ master ]
 
-env:
-  CARGO_PACKAGE: aether
-  CARGO_TERM_COLOR: always
-
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -28,5 +24,6 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
+          context: bin
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/$CARGO_PACKAGE:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/aether:latest
