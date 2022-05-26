@@ -2,11 +2,11 @@ FROM rust as builder
 
 RUN update-ca-certificates
 
-ADD code/crates/bin /appseed
+ADD . /appseed
 WORKDIR /appseed
 
 COPY . .
-RUN cargo build --package aether --release
+RUN cargo build --release
 
 FROM debian:buster-slim
 
