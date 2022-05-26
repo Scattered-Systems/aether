@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 env:
-  CARGO_PACKAGE: aether_core
+  CARGO_PACKAGE: disaronno
   CARGO_TERM_COLOR: always
 
 jobs:
