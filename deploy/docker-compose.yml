@@ -3,7 +3,7 @@ services:
   application:
     build:
       context: ../code/crates/bin
-      dockerfile: ../code/crates/bin/Dockerfile
+      dockerfile: Dockerfile
     container_name: application
     ports:
       - "8000:8080"
