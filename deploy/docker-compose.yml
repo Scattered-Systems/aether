@@ -24,15 +24,15 @@ services:
     depends_on:
       - datastore
     environment:
-      CLUSTER_PEERNAME: cluster0
-      CLUSTER_SECRET: ${CLUSTER_SECRET} # From shell variable if set
+      CLUSTER_PEERNAME: cluster
+      CLUSTER_SECRET: ${CLUSTER_SECRET}
       CLUSTER_IPFSHTTP_NODEMULTIADDRESS: /dns4/ipfs0/tcp/5001
-      CLUSTER_CRDT_TRUSTEDPEERS: '*' # Trust all peers in Cluster
-      CLUSTER_RESTAPI_HTTPLISTENMULTIADDRESS: /ip4/0.0.0.0/tcp/9094 # Expose API
-      CLUSTER_MONITORPINGINTERVAL: 2s # Speed up peer discovery
+      CLUSTER_CRDT_TRUSTEDPEERS: '*'
+      CLUSTER_RESTAPI_HTTPLISTENMULTIADDRESS: /ip4/0.0.0.0/tcp/9094
+      CLUSTER_MONITORPINGINTERVAL: 2s
     ports:
       - "9094:9094"
-      - "9096:9096" # Cluster IPFS Proxy endpoint
+      - "9096:9096"
     volumes:
       - ../artifacts/docker/data/cluster/0:/data/ipfs-cluster
 
