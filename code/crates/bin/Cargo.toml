@@ -7,7 +7,6 @@ name = "aether"
 repository = "https://github.com/scattered-systems/aether.git"
 version = "0.1.0"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [[bin]]
 bench = false
 name = "aether"
@@ -17,9 +16,12 @@ test = false
 [dependencies]
 aether_core = "0.1.0"
 axum = "0.5.6"
+blake2 = "0.10.4"
 bson = { features = ["chrono-0_4", "serde_with"], version = "2.2.0" }
+futures = "0.3.21"
 hyper = { features = ["full"], version = "0.14.18" }
 libp2p = "0.44.0"
 serde = { features = ["derive"], version = "1.0.137" }
 serde_json = "1.0.81"
+sha2 = "0.10.2"
 tokio = { features = ["full"], version = "1.18.2" }

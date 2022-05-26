@@ -26,4 +26,4 @@ jobs:
         with:
           context: bin
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/aether:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/bin:latest
