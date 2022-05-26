@@ -1,9 +1,9 @@
 job("Build and Push: Aether") {
     docker {
         build {
-            context = "."
-            file = "./Dockerfile"
-            args["HTTP_PROXY"] = "http://0.0.0.0:8888"
+            context = "./code/crates"
+            file = "./code/crates/Dockerfile"
+            args["HTTP_PROXY"] = "http://0.0.0.0:8080"
             labels["vendor"] = "scattered-systems"
         }
 

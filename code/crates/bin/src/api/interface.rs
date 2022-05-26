@@ -1,5 +1,4 @@
 use axum;
-
 use http::header;
 use tower_http::{
     compression::CompressionLayer,
@@ -7,55 +6,22 @@ use tower_http::{
     sensitive_headers::SetSensitiveHeadersLayer,
     trace,
 };
-use web3;
-
-use crate::{
-    core::{context::Context, logger::Logger, settings::Settings}
-};
-
-#[derive(Clone, Debug)]
-pub struct Connections {
-    pub chain: web3::Web3<web3::transports::Http>,
-}
-
-impl Connections {
-    pub fn new(settings: Settings) -> Result<Self, web3::Error> {
-        let endpoint: String = settings.provider.endpoint;
-        let transport = web3::transports::Http::new(endpoint.as_str())?;
-        let chain = web3::Web3::new(transport);
-        Ok(
-            Self {
-                chain
-            }
-        )
-    }
-}
 
 #[derive(Clone, Debug)]
 pub struct Interface {
     pub address: std::net::SocketAddr,
-    pub chain: web3::Web3<web3::transports::Http>,
+    pub context: crate::api::context::Context
 }
 
 impl Interface {
-    pub async fn new() -> Self {
-        let settings = match Settings::new() {
-            Ok(value) => value,
-            Err(err) => panic!("ConfigurationError: {:#?}", err)
-        };
+    pub async fn new(settings: crate::api::settings::Settings) -> Self {
+        crate::api::logger::Logger::setup(&settings);
 
-        Logger::setup(&settings);
-
-        let host = settings.server.host;
+        let host = [0, 0, 0, 0];
         let port = settings.server.port;
-        let address: std::net::SocketAddr = std::net::SocketAddr::from((host, port));
 
-        let connections = match Connections::new(settings.clone()) {
-            Ok(value) => value,
-            Err(err) => panic!("Connection Error: {:#?}", err)
-        };
-        let chain = connections.chain;
-        let context = Context::new(settings.clone());
+        let address: std::net::SocketAddr = std::net::SocketAddr::from((host, port));
+        let context = crate::api::context::Context::new(settings.clone());
 
         let client = axum::Router::new()
             .merge(crate::api::endpoints::base::create_route())
@@ -88,7 +54,7 @@ impl Interface {
                     )
                 )
             )
-            .layer(axum::Extension(context));
+            .layer(axum::Extension(context.clone()));
 
         println!("{}", settings.server);
 
@@ -97,6 +63,6 @@ impl Interface {
             .await
             .expect("Failed to start server");
 
-        Self { address, chain }
+        Self { address, context }
     }
 }

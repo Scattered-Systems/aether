@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::core::settings::Settings;
+use crate::api::settings::Settings;
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Context {

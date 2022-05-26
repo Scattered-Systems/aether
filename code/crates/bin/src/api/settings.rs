@@ -1,4 +1,5 @@
 use config::{Config, ConfigError, Environment, File};
+use glob::glob;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -26,7 +27,6 @@ pub struct Provider {
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Server {
-    pub host: [u8; 4],
     pub port: u16,
 }
 
@@ -47,17 +47,27 @@ pub struct Settings {
 
 impl Settings {
     pub fn new() -> Result<Self, ConfigError> {
-        let run_mode = std::env::var("RUN_MODE").unwrap_or_else(|_| "development".into());
-
         let mut builder = Config::builder()
-            .add_source(File::with_name("config/default.config"))
-            .add_source(File::with_name(&format!("config/{}.config", run_mode)).required(false))
-            .add_source(File::with_name("config/local.config").required(false))
-            .add_source(Environment::default().separator("__"));
+            .set_default("application.mode", "development")?
+            .set_default("application.name", "Application")?
+            .set_default("application.slug", "application")?
+            .set_default("database.name", "application")?
+            .set_default("database.uri", "redis://localhost:6379")?
+            .set_default("logger.level", "info")?
+            .set_default("provider.endpoint", "https://rpc.ankr.com/eth")?
+            .set_default("server.port", 8080)?;
 
+        builder = builder.add_source(glob("**/*.config.*")
+            .unwrap()
+            .map(|path| File::from(path.unwrap()).required(false))
+            .collect::<Vec<_>>()
+        );
+
+        builder = builder.add_source(Environment::default().separator("__"));
 
         if let Ok(port) = std::env::var("PORT") {
-            builder = builder.set_override("server.port", port)?;
+            builder = builder
+                .set_override("server.port", port)?;
         }
         builder.build()?.try_deserialize()
     }

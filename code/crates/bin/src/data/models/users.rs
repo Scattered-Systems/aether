@@ -1,4 +1,8 @@
+use bson;
+use chrono;
 use serde::{Deserialize, Serialize};
+
+pub type Timestamp = bson::DateTime;
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Name {
@@ -13,16 +17,16 @@ pub struct Name {
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct User {
-    id: bson::oid::ObjectId,
-    username: String,
-    created_at: bson::DateTime,
-    modified_at: bson::DateTime,
+    pub id: bson::oid::ObjectId,
+    pub username: String,
+    pub created_at: Timestamp,
+    pub modified_at: Timestamp,
 }
 
 impl User {
     pub fn new(username: String) -> Self {
         let id = bson::oid::ObjectId::new();
-        let created_at = chrono::Local::now().into();
+        let created_at: Timestamp = chrono::Local::now().into();
         Self {
             id,
             username,
