@@ -19,4 +19,6 @@ name = "simple"
 path = "tests/simple.rs"
 
 [dependencies]
-
+acme = "0.1.4"
+chrono = "0.4.19"
+serde = { features = ["derive"], version = "1.0.137" }
