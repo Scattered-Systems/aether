@@ -1,5 +1,4 @@
 use axum;
-use crate::{settings::Settings, app::endpoints};
 use http::header;
 use serde::{Deserialize, Serialize};
 use tower_http::{
@@ -9,10 +8,33 @@ use tower_http::{
     trace,
 };
 
+use crate::app::settings::Settings;
+
+pub mod endpoints {
+    pub mod base {
+        use axum;
+        use serde_json::{json, Value};
+
+        pub fn create_route() -> axum::Router {
+            axum::Router::new()
+                .route("/", axum::routing::get(base))
+        }
+
+        pub async fn base() -> axum::Json<Value> {
+            let mut cache: std::collections::HashMap<String, String> = std::collections::HashMap::new();
+            let timestamp: bson::DateTime = chrono::Local::now().into();
+            cache.insert(String::from("timestamp"), timestamp.to_string());
+            axum::Json(
+                json!(cache)
+            )
+        }
+    }
+}
+
 #[derive(Clone, Debug)]
 pub struct Application {
     pub address: std::net::SocketAddr,
-    pub context: Context
+    pub context: Context,
 }
 
 impl Application {
@@ -69,7 +91,10 @@ impl Application {
             .await
             .expect("Failed to start server");
 
-        Self { address, context }
+        Self {
+            address,
+            context,
+        }
     }
 }
 

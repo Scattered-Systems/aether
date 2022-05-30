@@ -1,10 +1,10 @@
+use crate::app::application::Application;
+
 mod app;
-mod chains;
-mod clients;
+mod blockchain;
 mod data;
-mod settings;
 
 #[tokio::main]
 async fn main() {
-    crate::app::application::Application::new().await;
+    Application::new().await?;
 }
