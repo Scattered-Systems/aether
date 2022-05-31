@@ -7,6 +7,7 @@ on:
     branches: [ master ]
 
 env:
+  CARGO_PACKAGE: acme-core
   CARGO_TERM_COLOR: always
 
 jobs:
@@ -19,6 +20,4 @@ jobs:
       - name: Test
         run: cargo test --workspace
       - name: Build and Push
-        run: cargo publish --package acme-core--verbose
-      - name: Build and Push
-        run: cargo publish --package disaronno --verbose
+        run: cargo publish --package $CARGO_PACKAGE --verbose
