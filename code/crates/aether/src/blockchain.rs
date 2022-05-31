@@ -1,10 +1,10 @@
-use acme::primitives::{Clock, Identity};
+use acme::primitives::{Clock, ObjectId};
 use chrono::Local;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, Deserialize, Hash, PartialEq, Serialize)]
 pub struct Block {
-    pub id: ObjectId,
+    pub id: usize,
     pub hash: String,
     pub previous: String,
     pub nonce: String,
