@@ -6,5 +6,5 @@ mod data;
 
 #[tokio::main]
 async fn main() {
-    Application::new().await?;
+    Application::new().await;
 }
