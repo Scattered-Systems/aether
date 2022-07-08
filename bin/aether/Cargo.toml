@@ -1,0 +1,22 @@
+[package]
+authors = ["FL03 <jo3mccain@icloud.com>", "Scattered-Systems (https://scattered-systems.com)"]
+categories = []
+description = "Aether is an EVM native multi-chain"
+edition = "2021"
+homepage = "https://github.com/scattered-systems/aether"
+keywords = []
+name = "aether
+readme = "README.md"
+repository = "https://github.com/scattered-systems/aether"
+version = "0.1.0"
+
+[[bin]]
+bench = false
+name = "aether"
+
+[dependencies]
+
+[dev-dependencies]
+
+[build-dependencies]
+
