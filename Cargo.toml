@@ -1,32 +1,22 @@
-[workspace]
-default-members = [
-    "bin/aether"
-]
+[package]
+authors = ["FL03 <jo3mccain@icloud.com>", "Scattered-Systems (https://scattered-systems.com)"]
+categories = []
+description = "Aether is an EVM native multi-chain"
+edition = "2021"
+homepage = "https://scattered-systems.github.io/aether/"
+keywords = []
+name = "aether"
+readme = "README.md"
+repository = "https://github.com/scattered-systems/aether"
+version = "0.1.0"
 
-members = [
-    "bin/aether"
-]
+[[bin]]
+bench = false
+name = "aether"
 
-[profile.dev]
-opt-level = 0
-debug = true
-split-debuginfo = '...'  # Platform-specific.
-debug-assertions = true
-overflow-checks = true
-lto = false
-panic = 'unwind'
-incremental = true
-codegen-units = 256
-rpath = false
+[dependencies]
 
-[profile.release]
-opt-level = "s"
-debug = false
-split-debuginfo = '...'  # Platform-specific.
-debug-assertions = false
-overflow-checks = false
-lto = false
-panic = 'unwind'
-incremental = false
-codegen-units = 16
-rpath = false
+[dev-dependencies]
+
+[build-dependencies]
+

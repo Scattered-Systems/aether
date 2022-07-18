@@ -1,9 +1,9 @@
 FROM jo3mccain/rusty as builder
 
-ADD . /app
+ADD bin/aether /app
 WORKDIR /app
 
-COPY . .
+COPY bin/aether .
 RUN cargo build --release --verbose --color always
 
 FROM debian:buster-slim as application
