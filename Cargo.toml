@@ -5,6 +5,7 @@ description = "Aether is an EVM native multi-chain"
 edition = "2021"
 homepage = "https://scattered-systems.github.io/aether/"
 keywords = []
+license = "MIT"
 name = "aether"
 readme = "README.md"
 repository = "https://github.com/scattered-systems/aether"
