@@ -4,7 +4,7 @@
    Description:
        ... Summary ...
 */
-use acme_sdk::collect_config_files;
+use crate::collect_config_files;
 pub use components::*;
 
 type ConfigBuilderDS = config::ConfigBuilder<config::builder::DefaultState>;
@@ -21,7 +21,7 @@ impl Configuration {
     pub fn constructor() -> Result<ConfigBuilderDS, config::ConfigError> {
         let mut builder = config::Config::builder()
             .set_default("application.mode", "development")?
-            .set_default("application.name", "acme")?
+            .set_default("application.name", "aether")?
             .set_default("database.name", "postgres")?
             .set_default(
                 "database.uri",
