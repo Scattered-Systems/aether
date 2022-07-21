@@ -18,7 +18,6 @@ mod common {
     mod constants {}
 
     mod types {
-        pub type AsyncError = Box<dyn std::error::Error + Send + Sync + 'static>;
         /// Describes a boxed dynamic error
         pub type StandardError = Box<dyn std::error::Error>;
         /// Describes a configuration builder in their default state
