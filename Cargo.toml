@@ -1,12 +1,12 @@
 [package]
 authors = ["FL03 <jo3mccain@icloud.com>", "Scattered-Systems (https://scattered-systems.com)"]
 categories = []
-description = "Aether is an EVM native multi-chain"
+description = "Aether is a next generation EVM Native Multi-Chain engineered for optimal preformance and the highest security"
 edition = "2021"
 homepage = "https://scattered-systems.github.io/aether/"
 keywords = []
 license = "MIT"
-name = "aether"
+name = "aether-sdk"
 readme = "README.md"
 repository = "https://github.com/scattered-systems/aether"
 version = "0.1.0"
@@ -14,6 +14,10 @@ version = "0.1.0"
 [[bin]]
 bench = false
 name = "aether"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+test = true
 
 [dependencies]
 acme = { features = ["full"], version = "0.1.48" }
