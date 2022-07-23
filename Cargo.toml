@@ -9,7 +9,7 @@ license = "MIT"
 name = "aether-sdk"
 readme = "README.md"
 repository = "https://github.com/scattered-systems/aether"
-version = "0.1.1"
+version = "0.1.2"
 
 [[bin]]
 bench = false
