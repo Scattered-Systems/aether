@@ -30,6 +30,7 @@ bson = { features = ["chrono-0_4", "serde_with"], version = "2.3.0" }
 chrono = "0.4.19"
 clap = { features = ["derive"], version = "3.2.8" }
 config = "0.13.1"
+disarray = { features = ["full"], version = ">=0.1.14" }
 glob = "0.3.0"
 http = "0.2.8"
 hyper = { features = ["full"], version = "0.14.19" }
