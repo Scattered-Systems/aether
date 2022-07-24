@@ -14,12 +14,12 @@ use tower_http::{
 };
 
 #[derive(Clone, Debug, Hash, PartialEq, serde::Deserialize, serde::Serialize)]
-pub struct Interface {
+pub struct AetherAPI {
     pub address: SocketAddr,
     pub context: Context,
 }
 
-impl Interface {
+impl AetherAPI {
     pub fn new() -> Self {
         let cnf = Configuration::new().ok().unwrap();
 
@@ -44,7 +44,7 @@ impl Interface {
     }
 }
 
-impl std::fmt::Display for Interface {
+impl std::fmt::Display for AetherAPI {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(
             f,
@@ -63,7 +63,7 @@ mod utils {
 
     pub fn create_server(address: SocketAddr, context: Context) -> AxumServer {
         let client = Router::new()
-            .merge(crate::index::create_route())
+            .merge(crate::endpoints::index::create_route())
             .layer(
                 trace::TraceLayer::new_for_http()
                     .make_span_with(trace::DefaultMakeSpan::new().include_headers(true))

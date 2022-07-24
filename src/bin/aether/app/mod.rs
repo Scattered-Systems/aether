@@ -4,10 +4,22 @@
    Description:
        ... Summary ...
 */
-pub use commands::*;
-pub use endpoints::*;
-pub use interfaces::*;
+use clap::Parser;
 
-mod commands;
-mod endpoints;
-mod interfaces;
+pub mod commands;
+pub mod endpoints;
+pub mod interfaces;
+
+#[derive(Clone, Debug, Hash, PartialEq, serde::Deserialize, serde::Serialize)]
+pub struct Aether;
+
+impl Aether {
+    pub async fn api() {
+        let mut api = interfaces::AetherAPI::new();
+        println!("{}", &api);
+        api.run().await
+    }
+    pub fn cli() -> interfaces::AetherCLI {
+        interfaces::AetherCLI::parse()
+    }
+}

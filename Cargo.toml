@@ -9,22 +9,22 @@ license = "MIT"
 name = "aether-sdk"
 readme = "README.md"
 repository = "https://github.com/scattered-systems/aether"
-version = "0.1.2"
+version = "0.1.3"
 
 [[bin]]
 bench = false
 name = "aether"
 
 [features]
-default = []
-full = []
+default = ["external"]
+external = ["disarray/full", "scsys/full"]
+full = ["external"]
 
 [lib]
 crate-type = ["cdylib", "rlib"]
 test = true
 
 [dependencies]
-acme = { features = ["full"], version = "0.1.48" }
 axum = { features = ["headers"], version = "0.5.11" }
 bson = { features = ["chrono-0_4", "serde_with"], version = "2.3.0" }
 chrono = "0.4.19"

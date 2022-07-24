@@ -10,12 +10,8 @@ mod app;
 mod core;
 mod data;
 
-pub(crate) type AsyncError = Box<dyn std::error::Error + Send + Sync + 'static>;
-
 #[tokio::main]
-async fn main() -> Result<(), AsyncError> {
-    let mut interface = Interface::new();
-    println!("{}", &interface);
-    interface.run().await;
+async fn main() -> Result<(), scsys::BoxError> {
+    Aether::api().await;
     Ok(())
 }

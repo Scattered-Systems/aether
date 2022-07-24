@@ -5,11 +5,10 @@
         ... Summary ...
 */
 
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn test() {
-        let f = |x: usize, y: usize| x + y;
-        assert_eq!(f(4, 2), 6)
-    }
+#[derive(clap::Subcommand, Clone, Debug, Hash, PartialEq, serde::Deserialize, serde::Serialize)]
+pub enum SubCommands {
+    Archive {
+        #[clap(default_value = "", long, short, value_parser)]
+        address: String,
+    },
 }

@@ -5,28 +5,19 @@
    Description:
        ... Summary ...
 */
-use axum;
+use axum::{routing::get, Json, Router};
 use std::collections::HashMap;
 
 pub type Dictionary<T> = HashMap<String, T>;
 pub type Container<T> = Dictionary<Vec<T>>;
 
-pub fn create_route() -> axum::Router {
-    axum::Router::new().route("/", axum::routing::get(base))
+pub fn create_route() -> Router {
+    axum::Router::new().route("/", get(current_time))
 }
 
-pub async fn base() -> axum::Json<serde_json::Value> {
+pub async fn current_time() -> Json<serde_json::Value> {
     let mut cache: Dictionary<String> = Dictionary::new();
     let timestamp: bson::DateTime = chrono::Local::now().into();
     cache.insert(String::from("timestamp"), timestamp.to_string());
-    axum::Json(serde_json::json!(cache))
-}
-
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn test() {
-        let f = |x: usize| x.pow(x.try_into().unwrap());
-        assert_eq!(f(2), 4)
-    }
+    Json(serde_json::json!(cache))
 }
