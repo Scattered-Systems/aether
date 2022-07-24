@@ -38,7 +38,23 @@ impl AetherAPI {
     }
 
     pub async fn run(&mut self) {
-        create_server(self.address.clone(), self.context.clone())
+        let client = axum::Router::new()
+            .merge(crate::endpoints::index::create_route())
+            .layer(
+                trace::TraceLayer::new_for_http()
+                    .make_span_with(trace::DefaultMakeSpan::new().include_headers(true))
+                    .on_request(trace::DefaultOnRequest::new().level(tracing::Level::INFO))
+                    .on_response(trace::DefaultOnResponse::new().level(tracing::Level::INFO)),
+            )
+            .layer(SetSensitiveHeadersLayer::new(std::iter::once(
+                http::header::AUTHORIZATION,
+            )))
+            .layer(CompressionLayer::new())
+            .layer(PropagateHeaderLayer::new(
+                http::header::HeaderName::from_static("x-request-id"),
+            ))
+            .layer(axum::Extension(self.context.clone()));
+        create_server(self.address.clone(), client)
             .await
             .expect("Server Error")
     }
@@ -61,23 +77,7 @@ mod utils {
 
     pub type AxumServer = Server<AddrIncoming, IntoMakeService<Router>>;
 
-    pub fn create_server(address: SocketAddr, context: Context) -> AxumServer {
-        let client = Router::new()
-            .merge(crate::endpoints::index::create_route())
-            .layer(
-                trace::TraceLayer::new_for_http()
-                    .make_span_with(trace::DefaultMakeSpan::new().include_headers(true))
-                    .on_request(trace::DefaultOnRequest::new().level(tracing::Level::INFO))
-                    .on_response(trace::DefaultOnResponse::new().level(tracing::Level::INFO)),
-            )
-            .layer(SetSensitiveHeadersLayer::new(std::iter::once(
-                http::header::AUTHORIZATION,
-            )))
-            .layer(CompressionLayer::new())
-            .layer(PropagateHeaderLayer::new(
-                http::header::HeaderName::from_static("x-request-id"),
-            ))
-            .layer(axum::Extension(context.clone()));
+    pub fn create_server(address: SocketAddr, client: Router) -> AxumServer {
         Server::bind(&address).serve(client.into_make_service())
     }
 
