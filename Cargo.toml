@@ -24,7 +24,7 @@ crate-type = ["cdylib", "rlib"]
 test = true
 
 [dependencies]
-acme = { features = ["full"], version = "0.1.48" }
+acme = { features = ["full"], version = "0.2.1" }
 axum = { features = ["headers"], version = "0.5.11" }
 bson = { features = ["chrono-0_4", "serde_with"], version = "2.3.0" }
 chrono = "0.4.19"
