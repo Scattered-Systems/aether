@@ -28,7 +28,7 @@ acme = { features = ["full"], version = "0.2.1" }
 axum = { features = ["headers"], version = "0.5.11" }
 bson = { features = ["chrono-0_4", "serde_with"], version = "2.3.0" }
 chrono = "0.4.19"
-clap = { features = ["derive"], version = "3.2.8" }
+clap = { features = ["derive"], version = "4.0.18" }
 config = "0.13.1"
 glob = "0.3.0"
 http = "0.2.8"
