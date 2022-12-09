@@ -37,4 +37,4 @@ EXPOSE 6379
 EXPOSE ${SERVER_PORT}
 
 ENTRYPOINT [ "aether" ]
-CMD [ "system", "on" ]
+CMD [ "system", "--up" ]

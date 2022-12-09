@@ -1,9 +1,9 @@
 /*
-    Appellation: template-axum-rust <binary>
+    Appellation: aether <binary>
     Contrib: FL03 <jo3mccain@icloud.com>
-    Description: ... Summary ...
+    Description:
+        Aether is set to service the platform in a number of ways from being the primary method of interacting with Disarray's PoW half
 */
-extern crate dotenv;
 pub use self::{context::*, settings::*, states::*};
 
 pub mod api;
@@ -17,7 +17,6 @@ use std::{fmt::Display, sync::Arc};
 
 #[tokio::main]
 async fn main() -> AsyncResult {
-    dotenv::dotenv()?;
     Application::<String>::default().start().await?;
 
     Ok(())
