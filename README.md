@@ -1,72 +1,51 @@
 # Aether
 
-Aether was created to support the future of internet based experiences by ensuring the digital security of all
-interactions on the network. Globally, Aether will be deployed as an Ethereum native multi-chain with a focus on
-security and speed. One of the optimization being developed is the advent of user-centric _microchains_ or a constant
-size, zk-SNARK blockchain which operates as their personal cloud computing platform as well as their key to public
-spaces.
+[![Clippy](https://github.com/scattered-systems/aether/actions/workflows/clippy.yml/badge.svg)](https://github.com/scattered-systems/aether/actions/workflows/clippy.yml)
+[![Docker](https://github.com/scattered-systems/aether/actions/workflows/docker.yml/badge.svg)](https://github.com/scattered-systems/aether/actions/workflows/docker.yml)
+[![Rust](https://github.com/scattered-systems/aether/actions/workflows/rust.yml/badge.svg)](https://github.com/scattered-systems/aether/actions/workflows/rust.yml)
+
+***
+
+Aether is designed as a natural extension of nodes participating in Disarray which operate proof-of-work consensus mechanisms, empowering users to quickly monetize their excess computational
+resources.
 
 ## Getting Started
 
-### Quickstart
+### Docker
 
-#### Docker
+Make sure you have docker installed on the target system
 
-    docker pull jo3mccain/aether:latest
+#### *Pull the image*
 
-#### From the Source
+```bash
+docker pull scsys/aether:latest
+```
 
-    git clone https://github.com/scattered-systems/aether.git
-    cargo build --workspace
-    cargo run --package aether
+#### *Build the image locally (optional)*
 
-### Workspace Configuration
+```bash
+docker buildx build --tag aether:latest .
+```
 
-Typically, all repositories will use a standard workspace to reduce the overall complexity of the individual systems.
+#### *Run the image*
 
-#### Standard Project Structure
+```bash
+docker run -p 8080:8080 scsys/aether:latest
+```
 
-    ~/project
-        .github
-            workflows
-        artifacts
-            docker
-                data
-        code
-            crates
-        config
-        deploy
-            kube
-            docker-compose.yml
-        .env
-        .gitignore
-        Cargo.toml
-        LICENSE
-        README.md
+### Usage
 
-### Developers
+```bash
 
-#### Contribute
+```
 
-    git clone https://github.com/scattered-systems/aether.git
+## Contributors
 
-    cargo build --package aether
-    cargo run --package aether
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-#### Docker
+Please make sure to update tests as appropriate.
 
-    docker run jo3mccain/aether
+## License
 
-## Resources
-
-### External
-
-* [Cardano](https://cardano.org)
-* [Ethereum](https://ethereum.org)
-* [Milkomeda](https://milkomeda.com)
-* [Mina Protocol](https://minaprotocol.com)
-
-### Internal
-
-* [Scattered-Systems](https://scattered-systems.com)
-* [Wiki](https://github.com/scattered-systems/aether/wiki)
+- [Apache-2.0](https://choosealicense.com/licenses/apache-2.0/)
+- [MIT](https://choosealicense.com/licenses/mit/)

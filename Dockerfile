@@ -1,17 +1,40 @@
-FROM jo3mccain/rusty as builder
+FROM rust:latest as base
 
-ADD . /app
-WORKDIR /app
+RUN apt-get update -y && apt-get upgrade -y
+
+FROM base as builder-base
+
+RUN apt-get install -y \
+    protobuf-compiler
+
+FROM builder-base as builder
+
+ENV CARGO_TERM_COLOR=always
+
+ADD . /workspace
+WORKDIR /workspace
 
 COPY . .
-RUN cargo build --release --verbose --color always
+RUN cargo build --release -v --workspace
 
-FROM photon as application
+FROM debian:buster-slim as runner-base
 
-ENV PORT=9000
-COPY --from=builder /app/target/release/aether /aether
+ENV RUST_LOG="info" \
+    SERVER_PORT=8080
 
-EXPOSE ${PORT}/tcp
-EXPOSE ${PORT}/udp
+RUN apt-get update -y && apt-get upgrade -y 
 
-ENTRYPOINT ["./aether"]
+COPY .config /config
+
+VOLUME ["/config"]
+
+COPY --from=builder /workspace/target/release/api /bin/api
+
+FROM runner
+
+EXPOSE 80
+EXPOSE 6379
+EXPOSE ${SERVER_PORT}
+
+ENTRYPOINT [ "api" ]
+CMD [ "system", "on" ]

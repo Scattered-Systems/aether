@@ -1,48 +1,33 @@
-[package]
-authors = ["FL03 <jo3mccain@icloud.com>", "Scattered-Systems (https://scattered-systems.com)"]
-categories = []
-description = "Aether is a next generation EVM Native Multi-Chain engineered for optimal preformance and the highest security"
-edition = "2021"
-homepage = "https://scattered-systems.github.io/aether/"
-keywords = []
-license = "MIT"
-name = "aether-sdk"
-readme = "README.md"
-repository = "https://github.com/scattered-systems/aether"
-version = "0.1.1"
+[workspace]
+default-members = [
+    "aether",
+]
 
-[[bin]]
-bench = false
-name = "aether"
+exclude = []
 
-[features]
-default = []
-full = []
+members = [
+    "aether",
+]
 
-[lib]
-crate-type = ["cdylib", "rlib"]
-test = true
 
-[dependencies]
-acme = { features = ["full"], version = "0.2.1" }
-axum = { features = ["headers"], version = "0.5.11" }
-bson = { features = ["chrono-0_4", "serde_with"], version = "2.3.0" }
-chrono = "0.4.19"
-clap = { features = ["derive"], version = "4.0.18" }
-config = "0.13.1"
-glob = "0.3.0"
-http = "0.2.8"
-hyper = { features = ["full"], version = "0.14.19" }
-reqwest = "0.11.11"
-scsys = { features = ["full"], version = ">=0.1.4" }
-serde = { features = ["derive"], version = "1.0.139" }
-serde_json = "1.0.82"
-tokio = { features = ["full"], version = "1.19.2" }
-tower = "0.4.13"
-tower-http = { features = ["compression-br", "propagate-header", "sensitive-headers", "trace"], version = "0.3.4" }
-tracing = "0.1.35"
-tracing-subscriber = "0.3.14"
+[profile.dev]
+codegen-units = 256
+debug = true
+debug-assertions = true
+incremental = true
+lto = false
+panic = "unwind"
+rpath = false
+opt-level = 0
+overflow-checks = true
 
-[dev-dependencies]
-
-[build-dependencies]
+[profile.release]
+codegen-units = 16
+debug = false
+debug-assertions = false
+incremental = false
+lto = false
+panic = "unwind"
+rpath = false
+opt-level = "z"
+overflow-checks = false
