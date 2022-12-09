@@ -10,9 +10,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, Deserialize, Eq, Hash, Hashable, PartialEq, Serialize)]
 pub struct Settings {
-    pub cid: Option<String>,
-    pub pk: Option<String>,
-    pub sk: Option<String>,
     pub mode: Option<String>,
     pub name: Option<String>,
     pub logger: Logger,
@@ -21,13 +18,9 @@ pub struct Settings {
 
 impl Settings {
     pub fn new(mode: Option<String>, name: Option<String>) -> Self {
-        let (cid, pk, sk) = (None, None, None);
         let logger = Logger::default();
-        let server = Server::default();
+        let server = Server::new("127.0.0.1".to_string(), 9099);
         Self {
-            cid,
-            pk,
-            sk,
             mode,
             name,
             logger,
@@ -39,18 +32,11 @@ impl Settings {
             .add_source(Environment::default().separator("__"))
             .set_default("logger.level", "info")?
             .set_default("server.host", "127.0.0.1")?
-            .set_default("server.port", 8080)?;
+            .set_default("server.port", 9099)?;
 
-        if let Ok(f) = try_collect_config_files("**/Backend.toml", false) {
+        if let Ok(f) = try_collect_config_files("**/Aether.toml", false) {
             builder = builder.add_source(f);
         }
-        if let Ok(k) = std::env::var("CLIENT_ID") {
-            builder = builder.set_override("cid", Some(k))?;
-        }
-        if let Ok(k) = std::env::var("CLIENT_SECRET") {
-            builder = builder.set_override("sk", Some(k))?;
-        }
-
         if let Ok(lvl) = std::env::var("RUST_LOG") {
             builder = builder.set_override("logger.level", lvl)?;
         }
@@ -72,7 +58,7 @@ impl Configurable for Settings {
 
 impl Default for Settings {
     fn default() -> Self {
-        Self::build().unwrap_or_else(|_| Self::new(None, Some("template-axum-rust".to_string())))
+        Self::build().unwrap_or_else(|_| Self::new(None, Some("Aether".to_string())))
     }
 }
 
