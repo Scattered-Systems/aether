@@ -28,7 +28,7 @@ COPY .config /config
 
 VOLUME ["/config"]
 
-COPY --from=builder /workspace/target/release/api /bin/api
+COPY --from=builder /workspace/target/release/aether /bin/aether
 
 FROM runner
 
@@ -36,5 +36,5 @@ EXPOSE 80
 EXPOSE 6379
 EXPOSE ${SERVER_PORT}
 
-ENTRYPOINT [ "api" ]
+ENTRYPOINT [ "aether" ]
 CMD [ "system", "on" ]
