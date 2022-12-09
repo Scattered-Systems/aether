@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 env:
-  DOCKERHUB_USERNAME: scsys
+  DOCKERHUB_USERNAME: jo3mccain
   IMAGE_NAME: scsys/aether
   IMAGE_TAG: latest
 
